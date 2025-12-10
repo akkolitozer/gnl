@@ -30,10 +30,7 @@ char	*fill_stash(int fd, char *stash)
 			return (NULL);
 		}
 		buffer[b] = 0;
-		if (!stash)
-			stash = ft_strdup(buffer);
-		else
-			stash = ft_strjoin(stash, buffer);
+		stash = ft_strjoin(stash, buffer);
 	}
 	free(buffer);
 	return (stash);
@@ -44,15 +41,20 @@ char	*get_valid_line(char *stash)
 	char	*line;
 	size_t	i;
 
+	i = 0;
 	if (!stash || !stash[0])
 		return (NULL);
-	i = ft_strchr(stash, '\n');
+	while (stash[i] && stash[i] != '\n')
+		i++;
 	line = malloc(sizeof(char) * (i + 1 + (stash[i] == '\n')));
 	if (!line)
 		return (NULL);
-	i = -1;
-	while (stash[++i] && stash[i] != '\n')
+	i = 0;
+	while (stash[i] && stash[i] != '\n')
+	{
 		line[i] = stash[i];
+		i++;
+	}
 	if (stash[i] == '\n')
 		line[i++] = '\n';
 	line[i]	= 0;
@@ -100,26 +102,26 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-// #include <fcntl.h>
-// #include <stdio.h>
-// int main(void)
-// {
-// 	int fd;
-// 	char *line;
+#include <fcntl.h>
+#include <stdio.h>
+int main(void)
+{
+	int fd;
+	char *line;
 
-// 	fd = open("gnl.txt", O_RDONLY);
-// 	if (fd < 0)
-// 	{
-// 		perror("open");
-// 		return (1);
-// 	}
-// 	line = get_next_line(fd);
-// 	while (line)
-// 	{
-// 		printf("%s", line);
-// 		free(line);
-// 		line = get_next_line(fd);
-// 	}
-// 	close(fd);
-// 	return (0);
-// }
+	fd = open("gnl.txt", O_RDONLY);
+	if (fd < 0)
+	{
+		perror("open");
+		return (1);
+	}
+	line = get_next_line(fd);
+	while (line)
+	{
+		printf("%s", line);
+		free(line);
+		line = get_next_line(fd);
+	}
+	close(fd);
+	return (0);
+}
