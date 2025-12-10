@@ -15,7 +15,7 @@
 char	*fill_stash(int fd, char *stash)
 {
 	char	*buffer;
-	int	b;
+	int		b;
 
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer)
@@ -57,7 +57,7 @@ char	*get_valid_line(char *stash)
 	}
 	if (stash[i] == '\n')
 		line[i++] = '\n';
-	line[i]	= 0;
+	line[i] = 0;
 	return (line);
 }
 
@@ -102,26 +102,26 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-#include <fcntl.h>
-#include <stdio.h>
-int main(void)
-{
-	int fd;
-	char *line;
+// #include <fcntl.h>
+// #include <stdio.h>
+// int main(void)
+// {
+// 	int fd;
+// 	char *line;
 
-	fd = open("gnl.txt", O_RDONLY);
-	if (fd < 0)
-	{
-		perror("open");
-		return (1);
-	}
-	line = get_next_line(fd);
-	while (line)
-	{
-		printf("%s", line);
-		free(line);
-		line = get_next_line(fd);
-	}
-	close(fd);
-	return (0);
-}
+// 	fd = open("gnl.txt", O_RDONLY);
+// 	if (fd < 0)
+// 	{
+// 		perror("open");
+// 		return (1);
+// 	}
+// 	line = get_next_line(fd);
+// 	while (line)
+// 	{
+// 		printf("%s", line);
+// 		free(line);
+// 		line = get_next_line(fd);
+// 	}
+// 	close(fd);
+// 	return (0);
+// }
