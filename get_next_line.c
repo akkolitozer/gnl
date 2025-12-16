@@ -6,7 +6,7 @@
 /*   By: hulescur <hulescur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 15:44:35 by hulescur          #+#    #+#             */
-/*   Updated: 2025/12/09 20:13:27 by hulescur         ###   ########.fr       */
+/*   Updated: 2025/12/16 19:30:06 by hulescur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ char	*fill_stash(int fd, char *stash)
 		if (b < 0)
 		{
 			free(buffer);
+			free(stash);
 			return (NULL);
 		}
 		buffer[b] = 0;
